@@ -318,11 +318,11 @@ class MailMerge(object):
             if len(rows) > 0:
                 del table[idx]
                 for i, row_data in enumerate(rows):
-                    logging.warning(rows)
-                    for idx, row in enumerate(table):
-                        if row.find('.//MergeField[@name="%s"]' % 'prueba') is not None:
+                    logging.warning(row_data)
+                    for idxx, row in enumerate(table):
+                        if row.find('.//MergeField[@name="%s"]' % list(row_data.keys())[0]) is not None:
                             self.merge([row], **row_data)
-                        table.insert(idx + i, row)
+                        table.insert(idxx + i, row)
             else:
                 # if there is no data for a given table
                 # we check whether table needs to be removed
