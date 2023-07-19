@@ -320,6 +320,7 @@ class MailMerge(object):
                 for idxrem, row in enumerate(table):
                     parent = row.getparent()
                     parent.remove(row)
+                index_element=0
                 for i, row_data in enumerate(rows):
                     logging.warning(row_data)
                     for idxx, row in enumerate(table_to_use):
@@ -327,7 +328,8 @@ class MailMerge(object):
                         self.merge([rowIns], **row_data)
                         logging.warning('insert in table')
                         logging.warning(rowIns)
-                        table.insert(idx + idxx + i, rowIns)
+                        table.insert(idx + index_element, rowIns)
+                        index_element+=1
             else:
                 # if there is no data for a given table
                 # we check whether table needs to be removed
