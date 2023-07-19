@@ -330,6 +330,11 @@ class MailMerge(object):
                         logging.warning(rowIns)
                         table.insert(idx + index_element, rowIns)
                         index_element+=1
+                    insert=1
+                    for elemento in list(row_data.keys()):
+                        if len(row_data[elemento]) > insert:
+                            insert = len(row_data[elemento])
+                    index_element+=insert-1
             else:
                 # if there is no data for a given table
                 # we check whether table needs to be removed
