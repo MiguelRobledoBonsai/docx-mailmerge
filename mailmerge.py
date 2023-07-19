@@ -314,15 +314,17 @@ class MailMerge(object):
 
     def merge_table(self, anchor, rows):
         table, idx, template = self.__find_row_anchor(anchor)
+        table_to_use = deepcopy(table)
         if table is not None:
             if len(rows) > 0:
                 del table[idx]
                 for i, row_data in enumerate(rows):
                     logging.warning(row_data)
-                    for idxx, row in enumerate(table):
+                    for idxx, row in enumerate(table_to_use):
                         if row.find('.//MergeField[@name="%s"]' % list(row_data.keys())[0]) is not None:
                             logging.warning('found data')
-                            self.merge([row], **row_data)
+                            rowIns = deepcopy(row)
+                            self.merge([rowIns], **row_data)
                         logging.warning('insert in table')
                         logging.warning(row)
                         table.insert(idxx + i, row)
