@@ -325,16 +325,21 @@ class MailMerge(object):
                     logging.warning(row_data)
                     for idxx, row in enumerate(table_to_use):
                         rowIns = deepcopy(row)
-                        self.merge([rowIns], **row_data)
-                        logging.warning('insert in table')
-                        logging.warning(rowIns)
-                        table.insert(idx + index_element, rowIns)
-                        index_element+=1
-                    insert=1
-                    for elemento in list(row_data.keys()):
-                        if len(row_data[elemento]) > insert:
-                            insert = len(row_data[elemento])
-                    index_element+=insert-1
+                        for row_field in row_data.keys():
+                            if row.find('.//MergeField[@name="%s"]' % row_field) is not None:
+                                if isinstance(row_data.keys()[row_field], list):
+                                    for row_ind_data in row_data.keys()[row_field]:
+                                        self.merge([rowIns], **row_ind_data)
+                                        logging.warning('insert in table')
+                                        logging.warning(rowIns)
+                                        table.insert(idx + index_element, rowIns)
+                                        index_element+=1
+                                else:
+                                    self.merge([rowIns], **row_field)
+                                    logging.warning('insert in table')
+                                    logging.warning(rowIns)
+                                    table.insert(idx + index_element, rowIns)
+                                    index_element+=1
             else:
                 # if there is no data for a given table
                 # we check whether table needs to be removed
