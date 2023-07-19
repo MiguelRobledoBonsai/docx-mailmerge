@@ -335,7 +335,7 @@ class MailMerge(object):
                                         table.insert(idx + index_element, rowIns)
                                         index_element+=1
                                 else:
-                                    self.merge([rowIns], **row_field)
+                                    self.merge([rowIns], **row_data[row_field])
                                     logging.warning('insert in table')
                                     logging.warning(rowIns)
                                     table.insert(idx + index_element, rowIns)
