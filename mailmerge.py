@@ -321,7 +321,10 @@ class MailMerge(object):
                     logging.warning(row_data)
                     for idxx, row in enumerate(table):
                         if row.find('.//MergeField[@name="%s"]' % list(row_data.keys())[0]) is not None:
+                            logging.warning('found data')
                             self.merge([row], **row_data)
+                        logging.warning('insert in table')
+                        logging.warning(row)
                         table.insert(idxx + i, row)
             else:
                 # if there is no data for a given table
