@@ -4,7 +4,7 @@ from lxml.etree import Element
 from lxml import etree
 from zipfile import ZipFile, ZIP_DEFLATED
 import shlex
-
+import logging
 
 NAMESPACES = {
     'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main',
@@ -318,8 +318,9 @@ class MailMerge(object):
             if len(rows) > 0:
                 del table[idx]
                 for i, row_data in enumerate(rows):
+                    logging.warning(rows)
                     for idx, row in enumerate(table):
-                        if row.find('.//MergeField[@name=') is not None:
+                        if row.find('.//MergeField[@name="%s"]' % 'prueba') is not None:
                             self.merge([row], **row_data)
                         table.insert(idx + i, row)
             else:
