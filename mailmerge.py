@@ -323,9 +323,9 @@ class MailMerge(object):
                     for idxx, row in enumerate(table_to_use):
                         rowIns = deepcopy(row)
                         self.merge([rowIns], **row_data)
-                        logging.warning('insert in table')
-                        logging.warning(rowIns)
-                        if rowIns.find('.//{%(w)s}tr' % NAMESPACES):
+                        if rowIns.find('.//{%(w)s}tr' % NAMESPACES) or i==0:
+                            logging.warning('insert in table')
+                            logging.warning(rowIns)
                             table.insert(idx + idxx + i, rowIns)
             else:
                 # if there is no data for a given table
