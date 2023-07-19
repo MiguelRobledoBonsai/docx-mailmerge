@@ -312,6 +312,23 @@ class MailMerge(object):
                     parent = table.getparent()
                     parent.remove(table)
 
+    def merge_table(self, anchor, rows):
+        table, idx, template = self.__find_row_anchor(anchor)
+        if table is not None:
+            if len(rows) > 0:
+                del table[idx]
+                for i, row_data in enumerate(rows):
+                    for idx, row in enumerate(table):
+                        if row.find('.//MergeField[@name=') is not None:
+                            self.merge([row], **row_data)
+                        table.insert(idx + i, row)
+            else:
+                # if there is no data for a given table
+                # we check whether table needs to be removed
+                if self.remove_empty_tables:
+                    parent = table.getparent()
+                    parent.remove(table)
+
     def __find_row_anchor(self, field, parts=None):
         if not parts:
             parts = self.parts.values()
