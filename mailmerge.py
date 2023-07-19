@@ -325,7 +325,8 @@ class MailMerge(object):
                         self.merge([rowIns], **row_data)
                         logging.warning('insert in table')
                         logging.warning(rowIns)
-                        table.insert(idx + idxx + i, rowIns)
+                        if rowIns.find('.//{%(w)s}tr' % NAMESPACES):
+                            table.insert(idx + idxx + i, rowIns)
             else:
                 # if there is no data for a given table
                 # we check whether table needs to be removed
