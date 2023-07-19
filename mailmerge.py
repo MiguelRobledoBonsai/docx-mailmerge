@@ -326,9 +326,9 @@ class MailMerge(object):
                     for idxx, row in enumerate(table_to_use):
                         rowIns = deepcopy(row)
                         for row_field in row_data.keys():
-                            if row.find('.//MergeField[@name="%s"]' % row_field) is not None:
-                                if isinstance(row_data.keys()[row_field], list):
-                                    for row_ind_data in row_data.keys()[row_field]:
+                            if rowIns.find('.//MergeField[@name="%s"]' % row_field) is not None:
+                                if isinstance(row_data[row_field], list):
+                                    for row_ind_data in row_data[row_field]:
                                         self.merge([rowIns], **row_ind_data)
                                         logging.warning('insert in table')
                                         logging.warning(rowIns)
