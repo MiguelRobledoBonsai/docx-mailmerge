@@ -317,16 +317,17 @@ class MailMerge(object):
         table_to_use = deepcopy(table)
         if table is not None:
             if len(rows) > 0:
-                del table[idx]
+                for idxrem, row in enumerate(table):
+                    parent = row.getparent()
+                    parent.remove(row)
                 for i, row_data in enumerate(rows):
                     logging.warning(row_data)
                     for idxx, row in enumerate(table_to_use):
                         rowIns = deepcopy(row)
                         self.merge([rowIns], **row_data)
-                        if rowIns.find('.//{%(w)s}tr' % NAMESPACES) or i==0:
-                            logging.warning('insert in table')
-                            logging.warning(rowIns)
-                            table.insert(idx + idxx + i, rowIns)
+                        logging.warning('insert in table')
+                        logging.warning(rowIns)
+                        table.insert(idx + idxx + i, rowIns)
             else:
                 # if there is no data for a given table
                 # we check whether table needs to be removed
