@@ -332,12 +332,14 @@ class MailMerge(object):
                                         rowIns = deepcopy(row)
                                         self.merge([rowIns], **row_ind_data)
                                         logging.warning('insert in table')
+                                        logging.warning(row_field)
                                         logging.warning(rowIns)
                                         table.insert(idx + index_element, rowIns)
                                         index_element+=1
                                 else:
                                     self.merge([rowIns], **row_data)
                                     logging.warning('insert in table')
+                                    logging.warning('regular field')
                                     logging.warning(rowIns)
                                     table.insert(idx + index_element, rowIns)
                                     index_element+=1
