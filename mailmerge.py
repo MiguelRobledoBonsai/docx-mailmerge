@@ -354,14 +354,14 @@ class MailMerge(object):
                                 logging.warning('cell in row')
                                 logging.warning(rowIns)
                                 logging.warning(rowIns.text)
-                                if rowIns.text != '':
+                                if rowIns.text != '' and rowIns.text != None:
                                     is_empty=False
                             else:
                                 for k, cell in enumerate(rowIns):
                                     logging.warning('cell in row')
                                     logging.warning(cell)
                                     logging.warning(cell.text)
-                                    if cell.text != '':
+                                    if cell.text != '' and cell.text != None:
                                         is_empty=False
                             if is_empty == False:
                                 table.insert(idx + index_element, rowIns)
