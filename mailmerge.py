@@ -354,7 +354,7 @@ class MailMerge(object):
                                 logging.warning('cell in row')
                                 logging.warning(cell)
                                 logging.warning(cell.text)
-                                if cell.text != '':
+                                if rowIns.text != '':
                                     is_empty=False
                             else:
                                 for k, cell in enumerate(rowIns):
