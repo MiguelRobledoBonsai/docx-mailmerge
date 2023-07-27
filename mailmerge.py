@@ -349,20 +349,7 @@ class MailMerge(object):
                             logging.warning('insert in table')
                             logging.warning('regular field')
                             logging.warning(rowIns)
-                            is_empty=True
-                            if len(list(rowIns)):
-                                for k, cell in enumerate(rowIns):
-                                    logging.warning('text in cell')
-                                    logging.warning(cell)
-                                    logging.warning(cell.text)
-                                    if cell.text != '' and cell.text != None:
-                                        is_empty=False
-                            else:
-                                logging.warning('text in row')
-                                logging.warning(rowIns)
-                                logging.warning(rowIns.text)
-                                if rowIns.text != '' and rowIns.text != None:
-                                    is_empty=False
+                            is_empty=self._check_if_is_empty(rowIns)
                             if is_empty == False:
                                 table.insert(idx + index_element, rowIns)
                             index_element+=1
@@ -373,6 +360,20 @@ class MailMerge(object):
                     parent = table.getparent()
                     parent.remove(table)
 
+    def _check_if_is_empty(self, parts=None):
+        if not parts:
+            parts = self.parts.values()
+        is_empty=True
+        if len(list(parts)):
+            for k, cell in enumerate(parts):
+                is_empty=self._check_if_is_empty(cell)
+        else:
+            logging.warning('text in parts')
+            logging.warning(parts)
+            logging.warning(parts.text)
+            if parts.text != '' and parts.text != None:
+                is_empty=False
+        return is_empty
     def __find_row_anchor(self, field, parts=None):
         if not parts:
             parts = self.parts.values()
