@@ -349,11 +349,22 @@ class MailMerge(object):
                             logging.warning('insert in table')
                             logging.warning('regular field')
                             logging.warning(rowIns)
-                            for cell in enumerate(rowIns):
+                            is_empty=True
+                            if len(list(rowIns)):
                                 logging.warning('cell in row')
                                 logging.warning(cell)
                                 logging.warning(cell.text)
-                            table.insert(idx + index_element, rowIns)
+                                if cell.text != '':
+                                    is_empty=False
+                            else:
+                                for k, cell in enumerate(rowIns):
+                                    logging.warning('cell in row')
+                                    logging.warning(cell)
+                                    logging.warning(cell.text)
+                                    if cell.text != '':
+                                        is_empty=False
+                            if is_empty == False:
+                                table.insert(idx + index_element, rowIns)
                             index_element+=1
             else:
                 # if there is no data for a given table
