@@ -361,11 +361,12 @@ class MailMerge(object):
                     parent.remove(table)
 
     def _check_if_is_empty(self, parts=None):
-        if not parts:
-            parts = self.parts.values()
         is_empty=True
-        if len(list(parts)):
+        if len(parts):
             for k, cell in enumerate(parts):
+                logging.warning('text in cell')
+                logging.warning(cell)
+                logging.warning(cell.text)
                 is_empty=self._check_if_is_empty(cell)
         else:
             logging.warning('text in parts')
