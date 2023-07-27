@@ -351,18 +351,18 @@ class MailMerge(object):
                             logging.warning(rowIns)
                             is_empty=True
                             if len(list(rowIns)):
-                                logging.warning('cell in row')
-                                logging.warning(rowIns)
-                                logging.warning(rowIns.text)
-                                if rowIns.text != '' and rowIns.text != None:
-                                    is_empty=False
-                            else:
                                 for k, cell in enumerate(rowIns):
-                                    logging.warning('cell in row')
+                                    logging.warning('text in cell')
                                     logging.warning(cell)
                                     logging.warning(cell.text)
                                     if cell.text != '' and cell.text != None:
                                         is_empty=False
+                            else:
+                                logging.warning('text in row')
+                                logging.warning(rowIns)
+                                logging.warning(rowIns.text)
+                                if rowIns.text != '' and rowIns.text != None:
+                                    is_empty=False
                             if is_empty == False:
                                 table.insert(idx + index_element, rowIns)
                             index_element+=1
