@@ -349,6 +349,10 @@ class MailMerge(object):
                             logging.warning('insert in table')
                             logging.warning('regular field')
                             logging.warning(rowIns)
+                            for cell in enumerate(rowIns):
+                                logging.warning('cell in row')
+                                logging.warning(cell)
+                                logging.warning(cell.text)
                             table.insert(idx + index_element, rowIns)
                             index_element+=1
             else:
